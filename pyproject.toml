@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "animatplot"
+version = "0.1.0"
+description = ""
+authors = ["reinanbr <perseu912@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+matplotlib = "^3.7.0"
+numpy = "^1.24.2"
+imageio = "^2.26.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
