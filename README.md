@@ -43,3 +43,4 @@ anime.render_gif(path='plot.gif',fps=8.7)
 ```sh
 logs: plot.gif saved in 6.8s
 ```
+<img src='https://github.com/reinanbr/animatPlot/blob/main/imgs/plot%20(9).gif?raw=true'>
