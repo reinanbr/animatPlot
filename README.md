@@ -10,6 +10,9 @@
 
 coding:
 ```py
+import numpy as np
+import matplotlib.pyplot as ply
+from animatplot import AnimatPlot
 x = np.linspace(-10,10,200)
 np.seterr(all="ignore")
 
@@ -27,7 +30,7 @@ def call_plt(plt,y,x):
   plt.ylim(0,1)
   return plt
 
-anime = AnimatePlot(sig,x,callback_plot=call_plt)
+anime = AnimatPlot(sig,x,callback_plot=call_plt)
 anime.render_cache()
 ```
 ```sh
