@@ -22,5 +22,7 @@ def call_plt(plt,y,x):
 
 def test_render_gif():
     anime = AnimatPlot(sig,x,callback_plot=call_plt)
+    anime.delete_cache()
     anime.render_cache()
     anime.render_gif('tests/gifs/sigmoid.gif')
+    

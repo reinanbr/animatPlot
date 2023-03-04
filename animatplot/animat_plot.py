@@ -59,7 +59,7 @@ class AnimatPlot:
       ping_total = time.time() - time_init
     
     else:
-      file_imgs = [file for file in glob.glob(self.pattern_dir+'*.png')]
+      file_imgs = [file for file in glob.glob(self.pattern_dir+'/*.png')]
 
       if file_imgs:
         imgs_imread = []
@@ -77,9 +77,11 @@ class AnimatPlot:
       os.mkdir(self.pattern_dir)
 
   def delete_cache(self):
-    if os.path.isdir(self.pattern_dir) and len(self.images)>2:
-      for i,image in self.images:
+    if os.path.isdir(self.pattern_dir):
+      file_imgs = [file for file in glob.glob(self.pattern_dir+'/*.png')]
+      for i,image in enumerate(file_imgs):
         os.remove(image)
+      os.rmdir(self.pattern_dir)
 
 
 
