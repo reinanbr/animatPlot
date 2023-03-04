@@ -1,15 +1,3 @@
-
-
-
-
-
-
-
-
-### Examples 
-
-coding:
-```py
 import numpy as np
 import matplotlib.pyplot as ply
 from animatplot import AnimatPlot # import AnimatPlot
@@ -36,22 +24,3 @@ def test_render_gif():
     anime = AnimatPlot(sig,x,callback_plot=call_plt)
     anime.render_cache()
     anime.render_gif('tests/gifs/sigmoid.gif')
-
-
-
-test_render_gif()
-```
-```sh
-logs:
-ended saved cache images! 
-[200 images saved in 30.9s | speed: 6.5/img/s | ping: 15.5ms]
-[Figure size 576x396 with 0 Axes]
-```
-saving the files from cache:
-```py
-anime.render_gif(path='plot.gif',fps=8.7)
-```
-```sh
-logs: plot.gif saved in 6.8s
-```
-<img src='https://github.com/reinanbr/animatPlot/blob/main/imgs/plot%20(9).gif?raw=true'>
