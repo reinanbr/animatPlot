@@ -2,11 +2,11 @@ import matplotlib.pyplot as plt
 import imageio
 import os, glob
 import time
-
+from animateplot.video import RenderVideo
 
 
 class AnimatPlot:
-  pattern_savefig = 'fig_%(i)s.png'
+  pattern_savefig = '%(i)s_fig.png'
   pattern_dir = '.data'
   images = None
   
@@ -24,7 +24,8 @@ class AnimatPlot:
   def render_cache(self):
     self.images = []
     if os.path.isdir(self.pattern_dir):
-      self.images = sorted([file for file in glob.glob(self.pattern_dir+'/'+'*.png')])
+      self.images = [file for file in glob.glob(self.pattern_dir+'/'+'*.png')]
+      self.images.sort(key=os.path.getmtime)
       print(f'find {len(self.images)} images in cache! \ngetting it images...')
     
     else:
@@ -69,6 +70,10 @@ class AnimatPlot:
     ping_total = time.time() - time_init
     print(f'{path} saved in {ping_total:.1f}s')
 
+  
+  def render_mp4(self,path_video,fps=8.7):
+    render_video = RenderVideo(self.pattern_dir,fps=fps)
+    render_video.render_mp4(path_video)
 
 
 

@@ -20,9 +20,10 @@ def call_plt(plt,y,x):
   return plt
 
 
-def test_render_gif():
+def test_render():
     anime = AnimatPlot(sig,x,callback_plot=call_plt)
-    anime.delete_cache()
+    #anime.delete_cache()
     anime.render_cache()
-    anime.render_gif('tests/gifs/sigmoid.gif')
+    #anime.render_gif('tests/gifs/sigmoid.gif')
+    anime.render_mp4('tests/videos/sigmoid.mp4',fps=10)
     
