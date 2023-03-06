@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as ply
-from animatplot import AnimatPlot # import AnimatPlot
+from animateplot import AnimatPlot # import AnimatPlot
 
 
 x = np.linspace(-10,10,200)
