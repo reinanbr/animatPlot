@@ -1,14 +1,17 @@
+<div align='center'>
 
+<img height='200'  width='200' src='imgs/logo.png'>
+<h2>AnimatePlot</h2>
 
-
-
-
+</div>
 
 
 
 ### Examples 
 
-coding:
+
+#### Gif 
+
 ```py
 import numpy as np
 import matplotlib.pyplot as ply
@@ -56,3 +59,5 @@ anime.render_gif(path='plot.gif',fps=8.7)
 logs: plot.gif saved in 6.8s
 ```
 <img src='https://github.com/reinanbr/animatPlot/blob/main/imgs/plot%20(9).gif?raw=true'>
+
+

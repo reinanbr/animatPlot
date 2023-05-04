@@ -5,7 +5,7 @@ import time
 from animateplot.video import RenderVideo
 
 
-class AnimatPlot:
+class AnimatePlot:
   pattern_savefig = '%(i)s_fig.png'
   pattern_dir = '.data'
   images = None

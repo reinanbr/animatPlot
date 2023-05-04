@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as ply
-from animateplot import AnimatPlot # import AnimatPlot
+from animateplot import AnimatePlot # import AnimatPlot
 
 
 x = np.linspace(-10,10,200)
@@ -21,9 +21,7 @@ def call_plt(plt,y,x):
 
 
 def test_render():
-    anime = AnimatPlot(sig,x,callback_plot=call_plt)
-    #anime.delete_cache()
+    anime = AnimatePlot(sig,x,callback_plot=call_plt)
     anime.render_cache()
-    #anime.render_gif('tests/gifs/sigmoid.gif')
     anime.render_mp4('tests/videos/sigmoid.mp4',fps=10)
     
