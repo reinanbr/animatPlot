@@ -3,6 +3,12 @@ import imageio
 import os, glob
 import time
 from animateplot.video import RenderVideo
+#from tqdm import tqdm
+from statistics import mode,median
+
+ping_list = [0]
+time_list = [time.time()]
+ping_last = 0
 
 
 class AnimatePlot:
@@ -23,16 +29,17 @@ class AnimatePlot:
 
   def render_cache(self):
     self.images = []
-    if os.path.isdir(self.pattern_dir):
+    if not os.path.isdir(self.pattern_dir):
       self.images = [file for file in glob.glob(self.pattern_dir+'/'+'*.png')]
       self.images.sort(key=os.path.getmtime)
-      print(f'find {len(self.images)} images in cache! \ngetting it images...')
+#      print(f'find {len(self.images)} images in cache! \ngetting it images...')
     
     else:
-      time_init = time.time()
-      for i,x in enumerate(self.x):
+      time_init = time_list[0]
+
+      for i,x in (enumerate(self.x)):
         self.__pattern_dir_check()
-        #print(f'[{i}/{self._size}]')
+        #print(f'[rendering: {i}/{self.size} images from {self.f.__name__}]',flush=True,end='\r')
         f = self.f(self.x[:i],*self.args)[:i] if self.args else self.f(self.x[:i])[:i]
         plot = self.plot(self.plt,f[:i],self.x[:i])
         img_plot = self.pattern_dir+'/'+self.pattern_savefig%{'i':str(i)}
@@ -40,6 +47,14 @@ class AnimatePlot:
         plot.cla()
         plot.clf()
         self.images.append(img_plot)
+        
+        ping = time.time() - time_list[-1]
+        ping_list.append(ping)
+        time_list.append(time.time())
+        ping_med = median(ping_list) #sum(ping_list)/len(ping_list)
+        time_last = time.time() - time_init #ping_list[0]
+        rest_time = ping_med*(self.size-i)
+        print(f'rendering {i}/{self.size} [{(100*i/self.size):.2f}% |  {(ping_med*100):.2f}m/s  |  {time_last:.1f}s | {rest_time:.1f}s]',end='\r',flush=True)
 
       ping_total = time.time()-time_init
       ping = 1000*ping_total/self.size
