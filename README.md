@@ -52,4 +52,7 @@ anime.render_mp4('sigmoid.mp4',fps=10)
 ```
 
 results:
+
+<br/>
+
 <img src='https://github.com/reinanbr/animatPlot/blob/main/imgs/plot%20(9).gif?raw=true'>
