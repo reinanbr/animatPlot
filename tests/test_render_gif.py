@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from animateplot import AnimatePlot # import AnimatPlot
 plt.style.use('seaborn')
 
-x = np.linspace(-10,10,100)
+x = np.linspace(-10,10,200)
 np.seterr(all="ignore")
 
 def sig(x):
