@@ -87,7 +87,7 @@ class AnimatePlot:
 
   
   def render_mp4(self,path_video,fps=8.7):
-    render_video = RenderVideo(self.pattern_dir,fps=fps)
+    render_video = RenderVideo(self.images,fps=fps)
     render_video.render_mp4(path_video)
 
 

@@ -1,6 +1,6 @@
 <div align='center'>
 
-<img height='200'  width='200' src='imgs/logo.png'>
+<img height='200'  width='200' src='https://raw.githubusercontent.com/reinanbr/animatPlot/main/imgs/logo.png'>
 <h2>AnimatePlot</h2>
 
 <p> Making video/gif from plot's</p>

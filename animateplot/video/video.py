@@ -9,14 +9,17 @@ class RenderVideo:
     __dir_pattern_imgs = '.data'
     
     
-    def __init__(self,dir:str,fps:int=8.7) -> None:
-        if os.path.isdir(dir):
-            self.__dir_pattern_imgs = dir
-            self.__fps = fps
-            self.__images = [file for file in glob.glob(self.__dir_pattern_imgs+'/*.png')]
-            self.__images.sort(key=os.path.getmtime)
-        else:
-            raise DirectoryNotExists(f'the pathDir {dir} not exist or not is a directory',dir)
+    def __init__(self,list_images:list,fps:int=8.7) -> None:
+        self.__images = list_images
+        self.__fps = fps# [file for file in glob.glob(self.__dir_pattern_imgs+'/*.png')]
+        self.__images.sort(key=os.path.getmtime)
+        # if os.path.isdir(dir):
+        #     self.__dir_pattern_imgs = dir
+        #     self.__fps = fps
+        #     self.__images = [file for file in glob.glob(self.__dir_pattern_imgs+'/*.png')]
+        #     self.__images.sort(key=os.path.getmtime)
+        # else:
+        #     raise DirectoryNotExists(f'the pathDir {dir} not exist or not is a directory',dir)
     
     
     def render_mp4(self,path_video:str):

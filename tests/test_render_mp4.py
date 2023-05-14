@@ -1,16 +1,16 @@
 import numpy as np
-import matplotlib.pyplot as ply
+import matplotlib.pyplot as plt
 from animateplot import AnimatePlot # import AnimatPlot
+plt.style.use('seaborn')
 
-
-x = np.linspace(-10,10,200)
+x = np.linspace(-10,10,50)
 np.seterr(all="ignore")
 
 def sig(x):
   return 1/(1+np.exp(-x))
 
 def call_plt(plt,y,x):
-  plt.style.use('seaborn')
+
   plt.plot(x,y)
   plt.title('sigmoid function')
   plt.xlabel('x')

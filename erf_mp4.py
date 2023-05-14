@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from animateplot import AnimatePlot as Ap
 from scipy import special
 import numpy as np
-
+plt.style.use('seaborn')
 
 erf = special.erf
 x = np.linspace(-2,2,200)
@@ -10,7 +10,7 @@ x = np.linspace(-2,2,200)
 
 
 def callback_plot(plt,y,x):
-	plt.style.use('seaborn')
+
 	plt.plot(x,y)
 	plt.xlim(-2,2)
 	plt.ylim(-1,1)
