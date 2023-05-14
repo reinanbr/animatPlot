@@ -21,3 +21,35 @@
 
 
 ### Examples 
+
+
+#### sigmoid function
+
+```py
+import matplotlib.pyplot as plt
+from animateplot import AnimatePlot as Ap
+import numpy as np
+
+plt.style.use('seaborn')
+
+def sig(x):
+  return 1/(1+np.exp(-x))
+
+def call_plt(plt,y,x):
+  plt.plot(x,y)
+  plt.title('sigmoid function')
+  plt.xlabel('x')
+  plt.ylabel('y')
+  plt.xlim(-10,10)
+  plt.ylim(0,1)
+  return plt
+
+anime = Ap(erf,x,callback_plot=callback_plot)
+
+anime.render_cache()
+anime.render_mp4('sigmoid.mp4',fps=10)
+
+```
+
+results:
+<img src='https://github.com/reinanbr/animatPlot/blob/main/imgs/plot%20(9).gif?raw=true'>
