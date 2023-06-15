@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 
 setup(name='animateplot',
-    version='0.3.2',
+    version='0.4.1',
     url='https://github.com/reinanbr/dreams',
     license='BSD v3',
     author='Reinan Br',
