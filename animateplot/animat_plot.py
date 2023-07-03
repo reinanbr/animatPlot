@@ -16,7 +16,7 @@ class AnimatePlot:
   pattern_dir = '.data'
   images = None
   
-  def __init__(self,x,f,callplot:plt,plt:plt=plt,args=None):
+  def __init__(self,x,f,callplot:plt,plt:plt=plt,args=None,dpi=None):
     self.__pattern_dir_check()
     self.f = f
     self.plot = callplot
@@ -24,6 +24,7 @@ class AnimatePlot:
     self.x = x
     self.size = len(self.x)
     self.plt = plt
+    self.dpi = dpi
 
 
 
@@ -43,7 +44,10 @@ class AnimatePlot:
         f = self.f(self.x[:i],*self.args)[:i] if self.args else self.f(self.x[:i])[:i]
         plot = self.plot(self.x[:i],f[:i],self.plt)
         img_plot = self.pattern_dir+'/'+self.pattern_savefig%{'i':str(i)}
-        plot.savefig(img_plot)
+        if self.dpi:
+          plot.savefig(img_plot,dpi=self.dpi)
+        else:
+          plt.savefig(img_plot)
         plot.cla()
         plot.clf()
         self.images.append(img_plot)
