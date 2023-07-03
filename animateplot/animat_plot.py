@@ -16,9 +16,8 @@ class AnimatePlot:
   pattern_dir = '.data'
   images = None
   
-  def __init__(self,x,f,callplot:plt,plt:plt=plt,args=None,dpi=None):
+  def __init__(self,x,callplot:plt,plt:plt=plt,args=None,dpi=None):
     self.__pattern_dir_check()
-    self.f = f
     self.plot = callplot
     self.args = args
     self.x = x
@@ -41,8 +40,8 @@ class AnimatePlot:
       for i,x in (enumerate(self.x)):
         self.__pattern_dir_check()
         #print(f'[rendering: {i}/{self.size} images from {self.f.__name__}]',flush=True,end='\r')
-        f = self.f(self.x[:i],*self.args)[:i] if self.args else self.f(self.x[:i])[:i]
-        plot = self.plot(self.x[:i],f[:i],self.plt)
+        #f = self.f(self.x[:i],*self.args)[:i] if self.args else self.f(self.x[:i])[:i]
+        plot = self.plot(self.x[:i],self.plt)
         img_plot = self.pattern_dir+'/'+self.pattern_savefig%{'i':str(i)}
         if self.dpi:
           plot.savefig(img_plot,dpi=self.dpi)
@@ -58,7 +57,7 @@ class AnimatePlot:
         ping_med = median(ping_list) #sum(ping_list)/len(ping_list)
         time_last = time.time() - time_init #ping_list[0]
         rest_time = ping_med*(self.size-i)
-        print(f'rendering {i}/{self.size} [{(100*i/self.size):.2f}% |  {(ping_med*100):.2f}m/s  |  {time_last:.1f}s | {rest_time:.1f}s]',end='\r',flush=True)
+        print(f'rendering {i}/{self.size} [{(100*i/self.size):.2f}% |  {(ping_med):.2f}s  |  {time_last:.1f}s | {rest_time:.1f}s]',end='\r',flush=True)
 
       ping_total = time.time()-time_init
       ping = 1000*ping_total/self.size
