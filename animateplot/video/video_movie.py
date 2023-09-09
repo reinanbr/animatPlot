@@ -3,7 +3,7 @@ import os
 import glob
 from animateplot.video.exceptions_animateplot import DirectoryNotExists
 
-
+from moviepy.editor import *
 
 class RenderVideo:
     __dir_pattern_imgs = '.data'
@@ -26,14 +26,10 @@ class RenderVideo:
         first_img = cv2.imread(self.__images[0])#os.path.join(self.__dir_pattern_imgs,self.__images[0]))
         y,x,_ = first_img.shape
         
-        video = cv2.VideoWriter(path_video,cv2.VideoWriter_fourcc('m','p','4','v'),self.__fps,(x,y))
-        for img in self.__images:
-            dir_img = os.path.join(self.__dir_pattern_imgs,img)
-            image = cv2.imread(img)
-            video.write(image)
-        
-        video.release()
-        cv2.destroyAllWindows()
+        time_frame = 1/self.__fps
+        clips = [ImageClip(m).set_duration(time_frame) for m in self.__images]
+        concat_clip = concatenate_videoclips(clips, method="compose")
+        concat_clip.write_videofile(path_video, fps=self.__fps)
 
 
 

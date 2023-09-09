@@ -3,7 +3,9 @@ import imageio
 import os, glob
 import time
 from animateplot.video import RenderVideo
-#from tqdm import tqdm
+from animateplot.video.video_movie import RenderVideo as rv
+from ipywidgets import Video
+#from tqdm import tqdmgit 
 from statistics import mode,median
 
 ping_list = [0]
@@ -41,12 +43,12 @@ class AnimatePlot:
         self.__pattern_dir_check()
         #print(f'[rendering: {i}/{self.size} images from {self.f.__name__}]',flush=True,end='\r')
         #f = self.f(self.x[:i],*self.args)[:i] if self.args else self.f(self.x[:i])[:i]
-        plot = self.plot(self.x[:i],self.plt)
+        plot = self.plot(i,self.plt)
         img_plot = self.pattern_dir+'/'+self.pattern_savefig%{'i':str(i)}
         if self.dpi:
           plot.savefig(img_plot,dpi=self.dpi)
         else:
-          plt.savefig(img_plot)
+          plot.savefig(img_plot)
         plot.cla()
         plot.clf()
         self.images.append(img_plot)
@@ -57,7 +59,8 @@ class AnimatePlot:
         ping_med = median(ping_list) #sum(ping_list)/len(ping_list)
         time_last = time.time() - time_init #ping_list[0]
         rest_time = ping_med*(self.size-i)
-        print(f'rendering {i}/{self.size} [{(100*i/self.size):.2f}% |  {(ping_med):.2f}s  |  {time_last:.1f}s | {rest_time:.1f}s]',end='\r',flush=True)
+        total_time = rest_time+time_last
+        print(f'rendering {i}/{self.size} [{(100*i/self.size):.2f}% |  {(ping_med):.2f} f/s  |  {time_last:.1f}s | {rest_time:.1f}s | {total_time:.1f}s ]',end='\r',flush=True)
 
       ping_total = time.time()-time_init
       ping = 1000*ping_total/self.size
@@ -90,8 +93,24 @@ class AnimatePlot:
 
   
   def render_mp4(self,path_video,fps=8.7):
-    render_video = RenderVideo(self.images,fps=fps)
+    render_video = rv(self.images,fps=fps)
     render_video.render_mp4(path_video)
+    self.play_jb_mp4(path_video)
+  
+  
+  def play_jb_mp4(self,path):
+    if 'JPY_PARENT_PID' in os.environ:
+      print(f"playing {path}")
+      if os.path.isfile(path):
+        
+        Video.from_file("estat.mp4", width=600, height=350)
+    #     HTML(f""" <video alt="test" controls>
+    #     <source src="{path}" type="video/mp4">
+    # </video> """)
+      else:
+        print(f"file video {path} not found")
+  
+  
 
 
 
