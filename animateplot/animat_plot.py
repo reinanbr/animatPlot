@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import imageio
 import os, glob
 import time
-from animateplot.video import RenderVideo
+from animateplot.video import RenderVideo as rv_cv
 from animateplot.video.video_movie import RenderVideo as rv
 from ipywidgets import Video
 #from tqdm import tqdmgit 
@@ -30,6 +30,8 @@ class AnimatePlot:
 
 
   def render_cache(self):
+    time_list = [time.time()]
+    ping_list = [0]
     self.images = []
     if not os.path.isdir(self.pattern_dir):
       self.images = [file for file in glob.glob(self.pattern_dir+'/'+'*.png')]
@@ -60,13 +62,17 @@ class AnimatePlot:
         time_last = time.time() - time_init #ping_list[0]
         rest_time = ping_med*(self.size-i)
         total_time = rest_time+time_last
-        print(f'rendering {i}/{self.size} [{(100*i/self.size):.2f}% |  {(ping_med):.2f} f/s  |  {time_last:.1f}s | {rest_time:.1f}s | {total_time:.1f}s ]',end='\r',flush=True)
+        print(f'rendering plots {i}/{self.size} [{(100*i/self.size):.2f}% |  {(ping_med):.2f} f/s  |  {time_last:.1f}s | {rest_time:.1f}s | {total_time:.1f}s ]',end='\r',flush=True)
 
       ping_total = time.time()-time_init
       ping = 1000*ping_total/self.size
       speed = self.size/ping_total
       print(f'ended saved cache images! \n[{self.size} images saved in {ping_total:.1f}s | speed: {speed:.1f}/img/s | ping: {ping:.1f}ms]')
-
+      ping_med = 0
+      time_last = 0
+      rest_time = 0
+      total_time = 0
+    
 
 
 
@@ -95,20 +101,21 @@ class AnimatePlot:
   def render_mp4(self,path_video,fps=8.7):
     render_video = rv(self.images,fps=fps)
     render_video.render_mp4(path_video)
-    self.play_jb_mp4(path_video)
+    return self.play_jb_mp4(path_video)
   
   
   def play_jb_mp4(self,path):
     if 'JPY_PARENT_PID' in os.environ:
-      print(f"playing {path}")
+     
       if os.path.isfile(path):
-        
-        Video.from_file("estat.mp4", width=600, height=350)
-    #     HTML(f""" <video alt="test" controls>
-    #     <source src="{path}" type="video/mp4">
-    # </video> """)
+        print(f"playing {path}")
+        return Video.from_file(path, width=600, height=350)
       else:
-        print(f"file video {path} not found")
+        return 0
+    else:
+      return 0
+ 
+ 
   
   
 

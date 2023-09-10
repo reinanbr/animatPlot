@@ -5,7 +5,7 @@
 
 <p> Making video from plot's</p>
 <a href='#'><img alt="CodeFactor Grade" src="https://img.shields.io/codefactor/grade/github/reinanbr/animatPlot?logo=codefactor">
-</a><img alt="CircleCI" src="https://img.shields.io/circleci/build/github/reinanbr/animatPlot">
+<!-- </a><img alt="CircleCI" src="https://img.shields.io/circleci/build/github/reinanbr/animatPlot"> -->
 <img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability-percentage/reinanbr/animatPlot">
 
 <br/>
@@ -29,14 +29,19 @@
 import matplotlib.pyplot as plt
 from animateplot import AnimatePlot as Ap
 import numpy as np
-
 plt.style.use('seaborn')
+
 
 def sig(x):
   return 1/(1+np.exp(-x))
 
-def call_plt(plt,y,x):
-  plt.plot(x,y)
+
+x = np.linspace(-10,10,100)
+y = sig(x)
+
+
+def call_plt(it,plt):
+  plt.plot(x[:it],y[:it])
   plt.title('sigmoid function')
   plt.xlabel('x')
   plt.ylabel('y')
@@ -44,10 +49,12 @@ def call_plt(plt,y,x):
   plt.ylim(0,1)
   return plt
 
-anime = Ap(erf,x,callback_plot=callback_plot)
+
+
+anime = Ap(x,callback_plot=callback_plot)
 
 anime.render_cache()
-anime.render_mp4('sigmoid.mp4',fps=10)
+anime.render_mp4('sigmoid.mp4',fps=15)
 
 ```
 

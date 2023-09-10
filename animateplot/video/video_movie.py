@@ -9,7 +9,7 @@ class RenderVideo:
     __dir_pattern_imgs = '.data'
     
     
-    def __init__(self,list_images:list,fps:int=8.7) -> None:
+    def __init__(self,list_images:list,fps:int=15) -> None:
         self.__images = list_images
         self.__fps = fps# [file for file in glob.glob(self.__dir_pattern_imgs+'/*.png')]
         self.__images.sort(key=os.path.getmtime)
@@ -29,7 +29,7 @@ class RenderVideo:
         time_frame = 1/self.__fps
         clips = [ImageClip(m).set_duration(time_frame) for m in self.__images]
         concat_clip = concatenate_videoclips(clips, method="compose")
-        concat_clip.write_videofile(path_video, fps=self.__fps)
+        concat_clip.write_videofile(path_video, fps=30)
 
 
 
