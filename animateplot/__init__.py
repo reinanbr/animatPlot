@@ -1,1 +1,1 @@
-from .animat_plot import AnimatePlot
+from animateplot.animat_plot import AnimatePlot
