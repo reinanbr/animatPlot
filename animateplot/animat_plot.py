@@ -18,12 +18,13 @@ class AnimatePlot:
   pattern_dir = '.data'
   images = None
   
-  def __init__(self,x,callplot:plt,plt:plt=plt,args=None,dpi=None):
+  def __init__(self,x=None,callplot:plt=None,plt:plt=plt,args=None,dpi=None):
     self.__pattern_dir_check()
-    self.plot = callplot
     self.args = args
-    self.x = x
-    self.size = len(self.x)
+    if(x!=None and callplot!=None):
+    	self.plot = callplot
+    	self.x = x
+    	self.size = len(self.x)
     self.plt = plt
     self.dpi = dpi
 
@@ -98,6 +99,7 @@ class AnimatePlot:
     print(f'{path} saved in {ping_total:.1f}s')
 
   
+
   def render_mp4(self,path_video,fps=8.7):
     render_video = rv(self.images,fps=fps)
     render_video.render_mp4(path_video)
