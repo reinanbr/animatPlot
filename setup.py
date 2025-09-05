@@ -5,8 +5,8 @@ with open("README.md", "r") as fh:
 
 
 setup(name='animateplot',
-      version='0.4.2',
-    url='https://github.com/reinanbr/dreams',
+      version='0.4.3',
+    url='https://github.com/reinanbr/animatePlot',
     license='BSD v3',
     author='Reinan Br',
     long_description=readme,
@@ -15,4 +15,4 @@ setup(name='animateplot',
     keywords='gif video plot',
     description=u"Library for generate gif or video from plots",
     packages=find_packages(),
-    install_requires=['matplotlib','numpy','imageio','opencv-python','moviepy'])
+    install_requires=['matplotlib','numpy','imageio','opencv-python','moviepy','ipywidgets'],)

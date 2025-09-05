@@ -1,7 +1,7 @@
 from animateplot import AnimatePlot as ap
 import numpy as np
 
-x = np.linspace(0,10,10)
+x = np.linspace(0,10,100)
 
 def call(i,plt):
     s = x[:i]
@@ -14,4 +14,4 @@ def call(i,plt):
 
 animat = ap(x,call)
 animat.render_cache()
-animat.render_mp4(path_video="test_2.mp4")
+animat.render_mp4(path_video="test_2.mp4",fps=15)

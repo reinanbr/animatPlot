@@ -2,12 +2,12 @@ import matplotlib.pyplot as plt
 import imageio
 import os, glob
 import time
-from animateplot.video import RenderVideo as rv_cv
+
 from animateplot.video.video_movie import RenderVideo as rv
 from ipywidgets import Video
 #from tqdm import tqdmgit 
 from statistics import mode,median
-
+import numpy as np
 ping_list = [0]
 time_list = [time.time()]
 ping_last = 0
@@ -21,10 +21,10 @@ class AnimatePlot:
   def __init__(self,x=None,callplot:plt=None,plt:plt=plt,args=None,dpi=None):
     self.__pattern_dir_check()
     self.args = args
-    if(x!=None and callplot!=None):
-    	self.plot = callplot
-    	self.x = x
-    	self.size = len(self.x)
+    if((type(x)==list or type(x)==np.ndarray) and callplot and plt):
+        self.plot = callplot
+        self.x = x
+        self.size = len(self.x)
     self.plt = plt
     self.dpi = dpi
 
@@ -100,7 +100,7 @@ class AnimatePlot:
 
   
 
-  def render_mp4(self,path_video,fps=8.7):
+  def render_mp4(self,path_video,fps=8.7,duration=None):
     render_video = rv(self.images,fps=fps)
     render_video.render_mp4(path_video)
     return self.play_jb_mp4(path_video)
