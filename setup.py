@@ -3,9 +3,9 @@ from setuptools import find_packages, setup
 with open("README.md", "r") as fh:
     readme = fh.read()
 
-
-setup(name='animateplot',
-      version='0.4.3',
+setup(
+    name='animateplot',
+    version='0.4.10',
     url='https://github.com/reinanbr/animatePlot',
     license='BSD v3',
     author='Reinan Br',
@@ -15,4 +15,27 @@ setup(name='animateplot',
     keywords='gif video plot',
     description=u"Library for generate gif or video from plots",
     packages=find_packages(),
-    install_requires=['matplotlib','numpy','imageio','opencv-python','moviepy','ipywidgets'],)
+    install_requires=[
+        'contourpy==1.3.3',
+        'cycler==0.12.1',
+        'decorator==5.2.1',
+        'fonttools==4.59.2',
+        'imageio==2.37.0',
+        'imageio-ffmpeg==0.6.0',
+        'kiwisolver==1.4.9',
+        'matplotlib==3.10.6',
+        'moviepy==2.2.1',
+        'numpy==2.2.6',
+        'opencv-python==4.12.0.88',
+        'packaging==25.0',
+        'pillow==11.3.0',
+        'proglog==0.1.12',
+        'pyparsing==3.2.3',
+        'python-dateutil==2.9.0.post0',
+        'python-dotenv==1.1.1',
+        'six==1.17.0',
+        'tqdm==4.67.1',
+        'ipywidgets',
+    ],
+    python_requires='>=3.8',
+)
